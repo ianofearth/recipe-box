@@ -1,0 +1,9 @@
+<h2>There was an error with your entry!</h2>
+
+<ul>
+  <% @recipe.errors().full_messages().each() do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
+<a href="/recipes">Back to view recipes</a>

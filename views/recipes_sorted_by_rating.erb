@@ -1,0 +1,67 @@
+
+<% if @recipes.any?() %>
+  <h2>Here are all your recipes sorted by rating:  [<a href="/recipes">no sorting</a>]</h2>
+
+  <ul>
+    <% @sorted_recipes.each do |recipe| %>
+      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+    <% end %>
+  </ul>
+
+  <% else %>
+  <h2>There are no recipes</h2>
+  <% end %>
+
+  <form action="/recipes/new_sorted_by_rating" method="post">
+
+    <label for="name">Recipe name:</label>
+    <input id="name" name="name" type="text">
+    <br>
+    <label for="instructions">Instructions:</label>
+    <input id="instructions" name="instructions" type="text">
+    <br>
+    <label for="rating">Rating:</label>
+    <input id="rating" name="rating" type="text">
+    <br>
+    <button type="submit">Add Recipe</button>
+  </form>
+
+<br>
+
+  <form action="/recipes/update" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="recipe_select">Select a recipe to update:  </label>
+    <br>
+    <select id="recipe_select" name="recipe_select">
+      <% @recipes.each() do |recipe| %>
+        <option value="<%= recipe.id %>"><%= recipe.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <label for="name">Recipe name:  </label>
+    <input id="name" name="name" type="text" value="">
+    <br>
+    <label for="instructions">Instructions:  </label>
+    <input id="instructions" name="instructions" type="text" value="">
+    <br>
+    <label for="rating">Rating:  </label>
+    <input id="rating" name="rating" type="text" value="">
+    <button type="submit">Update recipe</button>
+  </form>
+
+<br>
+
+  <form action="/recipes/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <label for="recipe_select">Select a recipe to delete:  </label>
+    <br>
+    <select id="recipe_select" name="recipe_select">
+      <% @recipes.each() do |recipe| %>
+        <option value="<%= recipe.id %>"><%= recipe.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <button type="submit">Delete recipe</button>
+  </form>
+
+  <a href="/">Home</a>
