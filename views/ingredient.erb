@@ -14,8 +14,12 @@
   <% if @ingredient.recipes().any?() %>
 
     <ul>
-      <% @ingredient.recipes().each() do |recipe| %>
-      <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+      <% @recipes.each() do |recipe| %>
+        <% recipe.ingredients().each() do |ingredient| %>
+          <% if ingredient.name() == @ingredient.name() %>
+          <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
 
