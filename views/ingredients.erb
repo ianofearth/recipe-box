@@ -1,0 +1,38 @@
+<h2>List of all ingredients</h2>
+<hr>
+<br>
+
+<% if @ingredients.any?() %>
+
+  <ul>
+    <% @ingredients.each() do |ingredient| %>
+
+      <li><%= ingredient.name() %></li>
+
+    <% end %>
+
+  </ul>
+
+<% else %>
+
+  <p>There are no ingredients in the database</p>
+
+<% end %>
+
+<form action="/categories/new" method="post">
+
+  <label for="name">Ingredient name:  </label>
+  <input id="name" name="name" type="text">
+  <br>
+  <label for="amount">Amount of Ingredient:  </label>
+  <input id="amount" name="amount" type="text">
+  <br>
+  <label for="unit_measure">What is the unit of measure?  </label>
+  <input id="unit_measure" name="unit_measure" type="text">
+  <br>
+  <button type="submit">Add Ingredient</button>
+</form>
+
+<br>
+
+<a href="/">Home</a>
