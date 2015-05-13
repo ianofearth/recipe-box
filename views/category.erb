@@ -7,7 +7,7 @@
   <% if @category.recipes().any?() %>
 
     <ul>
-      <% @recipes.each do |recipe| %>
+      <% @category.recipes().each do |recipe| %>
         <li><a href= "/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
       <% end %>
     </ul>
@@ -16,5 +16,20 @@
   <% else %>
   <h2>There are no recipes</h2>
   <% end %>
+  <br>
+
+  <form action="/categories/<%= @category.id() %>/add_recipe" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="recipe_name">Select a recipe to add:  </label>
+    <br>
+    <select id="recipe_select" name="recipe_select">
+      <% @recipes.each() do |recipe| %>
+        <option value="<%= recipe.id() %>"><%= recipe.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <button type="submit">Add Recipe to Category</button>
+  </form>
+
   <br>
   <a href="/categories">Return to categories</a>
