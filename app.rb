@@ -17,6 +17,18 @@ get('/recipes/:id') do
   erb(:recipe)
 end
 
+get('/categories') do
+  @categories = Category.all()
+  erb(:categories)
+end
+
+get("/categories/:id") do
+  id = params.fetch('id').to_i()
+  @category = Category.find(id)
+  erb(:category)
+end
+
+
 post('/recipes/new') do
   recipe_name = params.fetch('name')
   instructions = params.fetch('instructions')
@@ -25,4 +37,10 @@ post('/recipes/new') do
   # new_recipe.save() # the create will save automatically
   new_recipe = Recipe.create({:name => recipe_name, :instructions => instructions, :rating => rating})
   redirect("/recipes")
+end
+
+post('/categories/new') do
+  name = params.fetch('name')
+  new_category = Category.create({:name => name})
+  redirect('/categories')
 end
