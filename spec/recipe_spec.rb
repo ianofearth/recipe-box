@@ -18,5 +18,19 @@ describe('Recipe') do
       sorted_recipes = Recipe.all().sort_by{ |recipe| recipe.rating() }
       expect(sorted_recipes.reverse()).to(eq([test_2, test_3, test_1]))
     end
+
+    it('validates the presence of a recipe name') do
+      recipe = Recipe.new({:name => ""})
+      expect(recipe.save()).to(eq(false))
+    end
+    # it('validates the presence of a recipe name') do
+    #   recipe = Recipe.new({:name => ""})
+    #   expect(recipe.save()).to(eq(false))
+    # end
+    # it('validates the presence of a recipe name') do
+    #   recipe = Recipe.new({:name => ""})
+    #   expect(recipe.save()).to(eq(false))
+    # end
+
   end
 end

@@ -11,6 +11,10 @@ get('/recipes') do
   erb(:recipes)
 end
 
+get('/errors') do
+  erb(:errors)
+end
+
 get('/recipes/sorted_by_rating') do
   @recipes = Recipe.all()
   sorted_recipes = Recipe.all().sort_by{ |recipe| recipe.rating() }
@@ -54,8 +58,12 @@ post('/recipes/new') do
   rating = params.fetch('rating').to_i()
   # new_recipe = Recipe.new({:name => recipe_name, :instructions => instructions, :rating => rating})
   # new_recipe.save() # the create will save automatically
-  new_recipe = Recipe.create({:name => recipe_name, :instructions => instructions, :rating => rating})
-  redirect("/recipes")
+  @recipe = Recipe.new({:name => recipe_name, :instructions => instructions, :rating => rating})
+  if @recipe.save()
+    redirect("/recipes")
+  else
+    erb(:errors)
+  end
 end
 
 post('/recipes/new_sorted_by_rating') do
