@@ -11,6 +11,12 @@ get('/recipes') do
   erb(:recipes)
 end
 
+get('/recipes/:id') do
+  id = params.fetch('id').to_i()
+  @recipe = Recipe.find(id)
+  erb(:recipe)
+end
+
 post('/recipes/new') do
   recipe_name = params.fetch('name')
   instructions = params.fetch('instructions')

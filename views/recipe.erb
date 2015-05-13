@@ -1,0 +1,33 @@
+<h2><%= @recipe.name() %> Information</h2>
+<hr>
+<br>
+
+<p><strong>Instructions:</strong>
+<br>
+  <% if @recipe.instructions() == nil %>
+
+    No instructions were found.</p>
+
+  <% else %>
+
+    <%= @recipe.instructions() %></p>
+
+  <% end %>
+
+<br>
+
+<p><strong>Rating:</strong>
+<br>
+ <% if @recipe.rating() == nil %>
+
+   No rating was found.</p>
+
+<% else %>
+
+   <%= @recipe.rating() %></p>
+
+<% end %>
+
+<br>
+
+<p><a href="/recipes">Back to Recipes</a></p>
