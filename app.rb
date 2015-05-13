@@ -66,6 +66,17 @@ post('/recipes/new') do
   end
 end
 
+post('/recipes/:id/add_ingredient_to_recipe') do
+  id = params.fetch("id").to_i()
+  recipe = Recipe.find(id)
+  name = params.fetch("name")
+  amount = params.fetch("amount").to_i()
+  unit_measure = params.fetch("unit_measure")
+  new_ingredient = Ingredient.create({:name => name, :amount => amount, :unit_measure => unit_measure})
+  recipe.ingredients.push(new_ingredient) #creating new ingredient from form information and pushing the ingredient to the recipe's array
+  redirect("/recipes/" + id.to_s())
+end
+
 post('/recipes/new_sorted_by_rating') do
   recipe_name = params.fetch('name')
   instructions = params.fetch('instructions')
