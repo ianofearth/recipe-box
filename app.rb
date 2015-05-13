@@ -82,3 +82,46 @@ patch('/ingredients/:id/add_recipe') do
   @ingredient.recipes().push(recipe)
   redirect('/ingredients/' + id.to_s())
 end
+
+delete("/recipes/delete") do
+  recipe_id = params.fetch("recipe_select").to_i()
+  recipe = Recipe.find(recipe_id)
+  recipe.delete()
+  redirect("/recipes")
+end
+
+patch("/recipes/update") do
+  recipe_id = params.fetch("recipe_select").to_i()
+  @recipe = Recipe.find(recipe_id)
+  if params.fetch("name") != ""
+    name = params.fetch("name")
+    @recipe.update({:name => name}) #updates recipe and saves name
+  end
+  if params.fetch("instructions") != ""
+    instructions = params.fetch("instructions")
+    @recipe.update({:instructions => instructions})
+  end
+  if params.fetch("rating") != ""
+    rating = params.fetch("rating").to_i()
+    @recipe.update({:rating => rating})
+  end
+  redirect("/recipes")
+end
+
+patch("/ingredients/update") do
+  ingredient_id = params.fetch("ingredient_select").to_i()
+  @ingredient = Ingredient.find(ingredient_id)
+  if params.fetch("name") != ""
+    name = params.fetch("name")
+    @ingredient.update({:name => name}) #updates recipe and saves name
+  end
+  if params.fetch("amount") != ""
+    amount = params.fetch("amount")
+    @ingredient.update({:amount => amount})
+  end
+  if params.fetch("unit_measure") != ""
+    unit_measure = params.fetch("unit_measure")
+    @ingredient.update({:unit_measure => unit_measure})
+  end
+  redirect("/ingredients")
+end

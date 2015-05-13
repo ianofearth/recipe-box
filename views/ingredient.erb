@@ -1,7 +1,15 @@
 <h2><%= @ingredient.name() %></h2>
 <hr>
 <br>
-<p><strong>Ingredients:</strong></p>
+<p><strong>Ingredient Detail:  </strong></p>
+
+<ul>
+  <li>Amount:  <%= @ingredient.amount() %> <%= @ingredient.unit_measure() %></li>
+
+</ul>
+
+<br>
+<p><strong>Recipes that feature <%= @ingredient.name() %>:</strong></p>
 <br>
   <% if @ingredient.recipes().any?() %>
 
@@ -18,7 +26,7 @@
 
     <form action="/ingredients/<%= @ingredient.id() %>/add_recipe" method="post">
       <input type="hidden" name="_method" value="patch">
-      <label for="recipe_name">Select a recipe to add:  </label>
+      <label for="recipe_select">Select a recipe to add:  </label>
       <br>
       <select id="recipe_select" name="recipe_select">
         <% @recipes.each do |recipe| %>

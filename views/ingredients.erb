@@ -35,4 +35,26 @@
 
 <br>
 
+<form action="/ingredients/update" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="ingredient_select">Select an ingredient to update:  </label>
+  <br>
+  <select id="ingredient_select" name="ingredient_select">
+    <% @ingredients.each() do |ingredient| %>
+      <option value="<%= ingredient.id %>"><%= ingredient.name() %></option>
+    <% end %>
+  </select>
+  <br>
+  <label for="name">Ingredient name:  </label>
+  <input id="name" name="name" type="text" value="">
+  <br>
+  <label for="amount">Ingredient amount:  </label>
+  <input id="amount" name="amount" type="text" value="">
+  <br>
+  <label for="unit_measure">Ingredient unit measure:  </label>
+  <input id="unit_measure" name="unit_measure" type="text" value="">
+  <br>
+  <button type="submit">Update ingredient</button>
+</form>
+
 <a href="/">Home</a>
