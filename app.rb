@@ -34,6 +34,13 @@ get("/ingredients") do
   erb(:ingredients)
 end
 
+get('/ingredients/:id') do
+  id = params.fetch('id')
+  @ingredient = Ingredient.find(id)
+  @recipes = Recipe.all()
+  erb(:ingredient)
+end
+
 post('/recipes/new') do
   recipe_name = params.fetch('name')
   instructions = params.fetch('instructions')
@@ -65,4 +72,13 @@ patch('/categories/:id/add_recipe') do
   recipe = Recipe.find(recipe_id)
   @category.recipes().push(recipe)
   redirect('/categories/' + id.to_s())
+end
+
+patch('/ingredients/:id/add_recipe') do
+  id = params.fetch('id').to_i()
+  @ingredient = Ingredient.find(id)
+  recipe_id = params.fetch('recipe_select').to_i()
+  recipe = Recipe.find(recipe_id)
+  @ingredient.recipes().push(recipe)
+  redirect('/ingredients/' + id.to_s())
 end

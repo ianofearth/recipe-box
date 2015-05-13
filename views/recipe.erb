@@ -30,4 +30,17 @@
 
 <br>
 
+<% if @recipe.ingredients().any?() %>
+  <p><strong>Here is a list of the required ingredients for <%= @recipe.name %></strong></p>
+    <ul>
+      <% @recipe.ingredients().each() do |ingredient| %>
+        <li><a href="<%= ingredient.id() %>"><%= ingredient.name() %></a></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>You have not added ingredients for <%= @recipe.name %></p>
+<% end %>
+
+<br>
+
 <p><a href="/recipes">Back to Recipes</a></p>
