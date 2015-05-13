@@ -28,6 +28,10 @@ get("/categories/:id") do
   erb(:category)
 end
 
+get("/ingredients") do
+  @ingredients = Ingredient.all()
+  erb(:ingredients)
+end
 
 post('/recipes/new') do
   recipe_name = params.fetch('name')
@@ -43,4 +47,12 @@ post('/categories/new') do
   name = params.fetch('name')
   new_category = Category.create({:name => name})
   redirect('/categories')
+end
+
+post('/ingredients/new') do
+  name = params.fetch('name')
+  amount = params.fetch('amount')
+  unit_measure = params.fetch('unit_measure')
+  new_ingredient = Ingredient.create({:name => name, :amount => amount, :unit_measure => unit_measure})
+  redirect("/ingredients")
 end
