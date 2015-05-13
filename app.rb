@@ -11,6 +11,13 @@ get('/recipes') do
   erb(:recipes)
 end
 
+get('/recipes/sorted_by_rating') do
+  @recipes = Recipe.all()
+  sorted_recipes = Recipe.all().sort_by{ |recipe| recipe.rating() }
+  @sorted_recipes = sorted_recipes.reverse()
+  erb(:recipes_sorted_by_rating)
+end
+
 get('/recipes/:id') do
   id = params.fetch('id').to_i()
   @recipe = Recipe.find(id)
@@ -49,6 +56,16 @@ post('/recipes/new') do
   # new_recipe.save() # the create will save automatically
   new_recipe = Recipe.create({:name => recipe_name, :instructions => instructions, :rating => rating})
   redirect("/recipes")
+end
+
+post('/recipes/new_sorted_by_rating') do
+  recipe_name = params.fetch('name')
+  instructions = params.fetch('instructions')
+  rating = params.fetch('rating').to_i()
+  # new_recipe = Recipe.new({:name => recipe_name, :instructions => instructions, :rating => rating})
+  # new_recipe.save() # the create will save automatically
+  new_recipe = Recipe.create({:name => recipe_name, :instructions => instructions, :rating => rating})
+  redirect("/recipes/sorted_by_rating")
 end
 
 post('/categories/new') do
@@ -97,6 +114,13 @@ delete("/ingredients/delete") do
   redirect("/ingredients")
 end
 
+delete("/categories/delete") do
+  category_id = params.fetch('category_select').to_i()
+  category = Category.find(category_id)
+  category.delete()
+  redirect("/categories")
+end
+
 patch("/recipes/update") do
   recipe_id = params.fetch("recipe_select").to_i()
   @recipe = Recipe.find(recipe_id)
@@ -131,4 +155,12 @@ patch("/ingredients/update") do
     @ingredient.update({:unit_measure => unit_measure})
   end
   redirect("/ingredients")
+end
+
+patch("/categories/update") do
+  category_id = params.fetch("category_select").to_i()
+  @category = Category.find(category_id)
+  name = params.fetch("name")
+  @category.update({:name => name})
+  redirect("/categories")
 end

@@ -3,7 +3,7 @@
 
   <ul>
     <% @categories.each do |category| %>
-      <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a> [<a href="/categories/<%= category.id() %>/edit">edit</a>]</li>
+      <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a></li>
     <% end %>
   </ul>
 
@@ -18,5 +18,39 @@
 
     <button type="submit">Add category</button>
   </form>
+  <br>
+
+  <form action="/categories/update" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="category_select">Select a category to update:  </label>
+    <br>
+    <select id="category_select" name="category_select">
+      <% @categories.each() do |category| %>
+        <option value="<%= category.id %>"><%= category.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <label for="name">category name:  </label>
+    <input id="name" name="name" type="text" value="">
+    <br>
+    <button type="submit">Update category name</button>
+  </form>
+
+  <br>
+
+  <form action="/categories/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <label for="category_select">Select a category to delete:  </label>
+    <br>
+    <select id="category_select" name="category_select">
+      <% @categories.each() do |category| %>
+        <option value="<%= category.id %>"><%= category.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <button type="submit">Delete category</button>
+  </form>
+
+  <br>
 
   <a href="/">Home</a>

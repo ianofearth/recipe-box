@@ -1,6 +1,6 @@
 
 <% if @recipes.any?() %>
-  <h2>Here are all your recipes:</h2>
+  <h2>Here are all your recipes:  [<a href="/recipes/sorted_by_rating">sort by rating</a>]</h2>
 
   <ul>
     <% @recipes.each do |recipe| %>
