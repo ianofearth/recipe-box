@@ -1,0 +1,22 @@
+<% if @categories.any?() %>
+<h2>Here are your categories</h2>
+
+  <ul>
+    <% @categories.each do |category| %>
+      <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a> [<a href="/categories/<%= category.id() %>/edit">edit</a>]</li>
+    <% end %>
+  </ul>
+
+  <% else %>
+  <h2>There are no categories</h2>
+  <% end %>
+
+  <form action="/categories/new" method="post"
+
+    <label for="name">Category name:</label>
+    <input id="name" name="name" type="text">
+
+    <button type="submit">Add category</button>
+  </form>
+
+  <a href="/">Home</a>
