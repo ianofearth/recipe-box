@@ -90,6 +90,13 @@ delete("/recipes/delete") do
   redirect("/recipes")
 end
 
+delete("/ingredients/delete") do
+  ingredient_id = params.fetch('ingredient_select').to_i()
+  ingredient = Ingredient.find(ingredient_id)
+  ingredient.delete()
+  redirect("/ingredients")
+end
+
 patch("/recipes/update") do
   recipe_id = params.fetch("recipe_select").to_i()
   @recipe = Recipe.find(recipe_id)

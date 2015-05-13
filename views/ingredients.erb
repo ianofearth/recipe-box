@@ -56,5 +56,21 @@
   <br>
   <button type="submit">Update ingredient</button>
 </form>
+<br>
 
+<form action="/ingredients/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <label for="ingredient_select">Select a ingredient to delete:  </label>
+  <br>
+  <select id="ingredient_select" name="ingredient_select">
+    <% @ingredients.each() do |ingredient| %>
+      <option value="<%= ingredient.id %>"><%= ingredient.name() %></option>
+    <% end %>
+  </select>
+  <br>
+  <button type="submit">Delete ingredient</button>
+</form>
+
+
+<br>
 <a href="/">Home</a>
