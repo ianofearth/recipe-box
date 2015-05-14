@@ -1,6 +1,8 @@
 require('spec_helper')
 
-describe('Recipe') do
+describe(Recipe) do
+    it { should have_and_belong_to_many(:ingredients) }
+    it { should have_and_belong_to_many(:categories) }
 
   describe('.sort_by') do
     it('sorts the array of recipes, by recipe rating we hope') do
