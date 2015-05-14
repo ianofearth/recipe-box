@@ -1,0 +1,8 @@
+<h2>Recipes with a 10 rating</h2>
+
+
+<ul>
+  <% @rated_ten.each() do |recipe| %>
+    <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+  <% end %>
+</ul>
