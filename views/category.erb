@@ -22,7 +22,7 @@
     <input type="hidden" name="_method" value="patch">
     <label for="recipe_name">Select a recipe to add:  </label>
     <br>
-    <select id="recipe_select" name="recipe_select">
+    <select id="recipe_select_category" name="recipe_select_category">
       <% @recipes.each() do |recipe| %>
         <option value="<%= recipe.id() %>"><%= recipe.name() %></option>
       <% end %>

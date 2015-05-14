@@ -1,5 +1,5 @@
 require('bundler/setup')
-Bundler.require(:default)
+Bundler.require(:default, :production)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
@@ -104,7 +104,7 @@ end
 patch('/categories/:id/add_recipe') do
   id = params.fetch('id').to_i()
   @category = Category.find(id)
-  recipe_id = params.fetch('recipe_select').to_i()
+  recipe_id = params.fetch('recipe_select_category').to_i()
   recipe = Recipe.find(recipe_id)
   @category.recipes().push(recipe)
   redirect('/categories/' + id.to_s())
@@ -120,7 +120,7 @@ patch('/ingredients/:id/add_recipe') do
 end
 
 delete("/recipes/delete") do
-  recipe_id = params.fetch("recipe_select").to_i()
+  recipe_id = params.fetch("recipe_delete_select").to_i()
   recipe = Recipe.find(recipe_id)
   recipe.delete()
   redirect("/recipes")
@@ -152,16 +152,16 @@ end
 patch("/recipes/update") do
   recipe_id = params.fetch("recipe_select").to_i()
   @recipe = Recipe.find(recipe_id)
-  if params.fetch("name") != ""
-    name = params.fetch("name")
+  if params.fetch("name_update") != ""
+    name = params.fetch("name_update")
     @recipe.update({:name => name}) #updates recipe and saves name
   end
-  if params.fetch("instructions") != ""
-    instructions = params.fetch("instructions")
+  if params.fetch("instructions_update") != ""
+    instructions = params.fetch("instructions_update")
     @recipe.update({:instructions => instructions})
   end
-  if params.fetch("rating") != ""
-    rating = params.fetch("rating").to_i()
+  if params.fetch("rating_update") != ""
+    rating = params.fetch("rating_update").to_i()
     @recipe.update({:rating => rating})
   end
   redirect("/recipes")

@@ -38,14 +38,14 @@
       <% end %>
     </select>
     <br>
-    <label for="name">Recipe name:  </label>
-    <input id="name" name="name" type="text" value="">
+    <label for="name_update">Recipe name:  </label>
+    <input id="name_update" name="name_update" type="text" value="">
     <br>
-    <label for="instructions">Instructions:  </label>
-    <input id="instructions" name="instructions" type="text" value="">
+    <label for="instructions_update">Instructions:  </label>
+    <input id="instructions_update" name="instructions_update" type="text" value="">
     <br>
-    <label for="rating">Rating:  </label>
-    <input id="rating" name="rating" type="text" value="">
+    <label for="rating_update">Rating:  </label>
+    <input id="rating_update" name="rating_update" type="text" value="">
     <button type="submit">Update recipe</button>
   </form>
 
@@ -53,9 +53,9 @@
 
   <form action="/recipes/delete" method="post">
     <input type="hidden" name="_method" value="delete">
-    <label for="recipe_select">Select a recipe to delete:  </label>
+    <label for="recipe_delete_select">Select a recipe to delete:  </label>
     <br>
-    <select id="recipe_select" name="recipe_select">
+    <select id="recipe_delete_select" name="recipe_delete_select">
       <% @recipes.each() do |recipe| %>
         <option value="<%= recipe.id %>"><%= recipe.name() %></option>
       <% end %>
