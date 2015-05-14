@@ -32,5 +32,11 @@ describe('Recipe') do
     #   expect(recipe.save()).to(eq(false))
     # end
 
+    it('will title case recipe names, excluding special words') do
+      recipe = Recipe.new(:name => "fancy rice", :instructions => "add water, boil, add ketchup", :rating => 5)
+      recipe.save()
+      expect(recipe.name()).to(eq("Fancy Rice"))
+    end
+
   end
 end

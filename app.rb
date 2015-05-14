@@ -70,7 +70,7 @@ post('/recipes/:id/add_ingredient_to_recipe') do
   id = params.fetch("id").to_i()
   recipe = Recipe.find(id)
   name = params.fetch("name")
-  amount = params.fetch("amount").to_i()
+  amount = params.fetch("amount")
   unit_measure = params.fetch("unit_measure")
   new_ingredient = Ingredient.create({:name => name, :amount => amount, :unit_measure => unit_measure})
   recipe.ingredients.push(new_ingredient) #creating new ingredient from form information and pushing the ingredient to the recipe's array
@@ -140,6 +140,15 @@ delete("/categories/delete") do
   redirect("/categories")
 end
 
+delete("/recipes/:id/remove_ingredient") do
+  ingredient_id = params.fetch("name_select").to_i()
+  ingredient = Ingredient.find(ingredient_id)
+  ingredient.delete()
+  recipe_id = params.fetch("id").to_i()
+  redirect("/recipes/" + recipe_id.to_s())
+end
+
+
 patch("/recipes/update") do
   recipe_id = params.fetch("recipe_select").to_i()
   @recipe = Recipe.find(recipe_id)
@@ -182,4 +191,13 @@ patch("/categories/update") do
   name = params.fetch("name")
   @category.update({:name => name})
   redirect("/categories")
+end
+
+patch("/categories/:id/remove_recipe") do
+  category_id = params.fetch("id").to_i()
+  @category = Category.find(category_id)
+  recipe_id = params.fetch("recipe_select").to_i()
+  recipe = Recipe.find(recipe_id)
+  @category.recipes.destroy(recipe)
+  redirect("/categories/" + category_id.to_s())
 end

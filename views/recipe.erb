@@ -57,4 +57,22 @@
   <button type="submit">Add Ingredient</button>
 </form>
 
+<br>
+
+<form action="/recipes/<%= @recipe.id %>/remove_ingredient" method="post">
+  <input type="hidden" name="_method" value="delete"
+  <label for="name_select">Ingredient to remove:</label>
+  <select id="name_select" name="name_select">
+    <% @recipe.ingredients.each() do |ingredient| %>
+      <option value="<%= ingredient.id %>"><%= ingredient.name %></option>
+    <% end %>
+  </select>
+  <br>
+  <button type="submit">Remove ingredient from recipe</button>
+</form>
+
+<br>
+
+
+
 <p><a href="/recipes">Back to Recipes</a></p>

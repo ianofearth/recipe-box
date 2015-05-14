@@ -32,4 +32,20 @@
   </form>
 
   <br>
+
+  <form action ="/categories/<%= @category.id %>/remove_recipe" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="select_recipe">Select a recipe to remove from category</label>
+    <br>
+    <select id="recipe_select" name="recipe_select">
+      <% @category.recipes.each() do |recipe| %>
+        <option value="<%= recipe.id() %>"><%= recipe.name() %></option>
+      <% end %>
+    </select>
+    <br>
+    <button type="submit">Remove recipe from category</button>
+  </form>
+
+  <br>
+
   <a href="/categories">Return to categories</a>
