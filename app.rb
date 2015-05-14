@@ -22,6 +22,11 @@ get('/recipes/sorted_by_rating') do
   erb(:recipes_sorted_by_rating)
 end
 
+get('/rating_ten') do
+  @rated_ten = Recipe.rated_ten()
+  erb(:rating_ten)
+end
+
 get('/recipes/:id') do
   id = params.fetch('id').to_i()
   @recipe = Recipe.find(id)
