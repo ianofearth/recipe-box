@@ -4,7 +4,11 @@ class Recipe < ActiveRecord::Base
 
   validates(:name, {:presence => true, :length => { :minimum => 1 }})
   validates(:instructions, {:presence => true, :length => { :minimum => 1 }})
+  validates(:rating, numericality: { less_than: 11 })
   before_save(:title_case_recipe)
+  # scope(:rated, -> do
+  #   where({:rating => > 0})
+  # end)
 
 private
 
